@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+/out/
+/data/
+*.stl
+*.npz
+
+.vscode/
+.idea/
+.DS_Store
