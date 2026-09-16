@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "balancetrack"
+version = "0.1.0"
+description = "Gait analysis and custom insole generation for the Balance Track sensor insole"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.21",
+    "scipy>=1.7",
+    "requests>=2.25",
+    "matplotlib>=3.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+balancetrack = "balancetrack.cli:main"
+
+[tool.setuptools]
+packages = ["balancetrack"]
+
+[tool.setuptools.package-data]
+balancetrack = ["data/*.json"]
