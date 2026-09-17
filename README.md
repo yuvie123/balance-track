@@ -2,6 +2,8 @@
 
 A self-powered sensor insole for people with vestibular balance disorders, and the software that turns a walk into a custom 3D printed insole.
 
+I built this between September 2025 and April 2026 and am only putting it on GitHub now, in September 2026. The code was cleaned up and reorganized for this upload, so it won't match the original prototype line for line.
+
 Balance therapy usually runs $100-200 per clinical session. The idea here is a one-time ~$121 device: wear the sensor insole for a few minutes of walking, look at how the foot actually moves, then print a corrective insole with support where the instability shows up.
 
 ```
