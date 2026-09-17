@@ -1,6 +1,6 @@
 # Balance Track
 
-**A shoe insole that watches how you walk, then designs a custom insole to help you stay steady.**
+A shoe insole that watches how you walk, then designs a custom insole to help you stay steady.
 
 Some people have balance problems caused by their inner ear (called vestibular disorders). Their feet can roll inward or outward, or wobble from step to step, which makes falls more likely. Therapy for this usually costs $100-200 per session. Balance Track tries to help for a one-time cost of about $121.
 
@@ -17,11 +17,7 @@ sensor insole        for problems in           an insole with extra
 
 **1. Scan.** You put the sensor insole in your shoe and walk normally for 2-3 minutes. A tiny computer inside it (an ESP32) records how your foot moves 100 times every second: how hard your heel hits the ground, and how much your foot tilts and rolls.
 
-**2. Read.** When you're done, the insole makes its own WiFi network and sends the recording to a laptop. The laptop program:
-
-- counts each step by finding the moment your heel hits the ground
-- measures things like how far your foot rolls to one side and how steady your steps are
-- compares your numbers to what's normal for someone your height and weight
+**2. Read.** When you're done, the insole makes its own WiFi network and sends the recording to a laptop. The laptop program counts each step by finding the moment your heel hits the ground, measures things like how far your foot rolls to one side and how steady your steps are, and compares your numbers to what's normal for someone your height and weight.
 
 **3. Print.** Wherever your walking is noticeably off from normal, the program adds support to that part of the insole. It makes a 3D model file (an STL) in your shoe size that you can send to any 3D printer.
 
@@ -34,20 +30,21 @@ sensor insole        for problems in           an insole with extra
 
 If your walking looks normal, you just get a flat 3 mm insole.
 
-Here's what the report looks like for a sample walk (made with simulated data) where the foot rolls inward:
+Here's the report for a sample walk (made with simulated data) where the foot rolls inward:
 
 ![Sample report](docs/example_report.png)
 
-- **Top:** each red dot is a detected step.
-- **Bottom left:** red bars are the measurements that were off from normal.
-- **Right:** the insole seen from above. Brighter areas are thicker.
+Each red dot in the top chart is a detected step. The red bars at the bottom left are the measurements that were off from normal. On the right is the insole seen from above, where brighter areas are thicker.
 
 ## A few problems I had to solve
 
-- **Keeping the timing even.** Saving to memory after every reading was too slow and messed up the timing, so the insole saves readings in batches of 200 instead.
-- **Stopping the sensor from drifting.** Motion sensors slowly lose track of which way is up. The insole constantly corrects itself using the direction of gravity, so it stays accurate for the whole walk.
-- **Not counting a step twice.** Your heel bounces slightly when it lands, which can look like two steps. After each step the program ignores the next 0.35 seconds.
-- **Making a printable shape.** A 3D printer needs a fully closed shape with no holes. The program checks every model before saving it.
+Saving to memory after every reading was too slow and threw off the timing, so the insole saves readings in batches of 200 instead.
+
+Motion sensors slowly lose track of which way is up. The insole keeps correcting itself using the direction of gravity, so it stays accurate for the whole walk.
+
+Your heel bounces slightly when it lands, which can look like two steps. After each step the program ignores the next 0.35 seconds.
+
+A 3D printer needs a fully closed shape with no holes, so the program checks every model before saving it.
 
 ## What's in here
 
@@ -73,7 +70,7 @@ Wiring instructions are in [firmware/README.md](firmware/README.md).
 
 You need Python 3.8 or newer.
 
-**Install:**
+### Install
 
 ```
 python -m venv .venv
@@ -83,7 +80,7 @@ pip install -e "analysis[dev]"
 
 (On Mac or Linux, use `source .venv/bin/activate` for the second line.)
 
-**Try it with the sample walk (no hardware needed):**
+### Try it with the sample walk (no hardware needed)
 
 ```
 balancetrack run examples/sample_session.csv --height 175 --weight 70 --shoe 10 --foot left --both -o out
@@ -91,7 +88,7 @@ balancetrack run examples/sample_session.csv --height 175 --weight 70 --shoe 10 
 
 This makes an `out` folder with the report image and 3D models for both feet.
 
-**With the real insole:**
+### With the real insole
 
 1. Press the button. Keep your foot still while the light blinks fast (about 2 seconds). Then walk for 2-3 minutes and press the button again.
 2. On your laptop, connect to the WiFi network called `BalanceTrack`.
@@ -102,7 +99,7 @@ This makes an `out` folder with the report image and 3D models for both feet.
 
 Shoe sizes can be `us-men` (the default), `us-women`, `uk` or `eu`. For example: `--shoe 42 --system eu`.
 
-**Other commands:**
+### Other commands
 
 | Command | What it does |
 | --- | --- |
